@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<title>Test</title>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<style>
+body {padding : 0; margin: 0;}
+</style>
+<body>
+    <script language="javascript" type="text/javascript" src="matter.js"></script>
+    <script language="javascript" type="text/javascript" src="test.js"></script>
+    <script language="javascript" type="text/javascript" src="p5.js"></script>
+    <script language="javascript" type="text/javascript" src="Box.js"></script>        
+    <script language="javascript" type="text/javascript" src="newObj.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script language="javascript" type="text/javascript" src="chart.min.js"></script>
+
+
+
+
+    <button id="button" onclick="addObj()">Add Object</button>
+    <button id="start" onclick="start()">Start</button>
+    <button id="reset" onclick="reset()">Reset</button>
+    <label>
+        Restitution : 
+        <input type="text" id="rest_inp" value="0.6"></input>
+    </label>
+    <label>
+        G  : 
+        <input type="text" id="g_" value="0.8"></input>
+    </label>
+    <label> Update Graph : 
+    <button id="gUpdate" onclick="onGraphUpdate(this.id)">True</button>
+    </label>
+    <canvas id="chart" style="position: absolute; top: 650px; left: 300px; height: 300px;width: 800px;"></canvas    >
+</body>
+</html>
