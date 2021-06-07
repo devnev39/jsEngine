@@ -28,8 +28,8 @@ let vels = [];
 let angs = [];
 let mass = [];
 
-let ke;
-let pe;
+let ke = [];
+let pe = [];
 let chart;
 
 
@@ -74,6 +74,9 @@ function setup(){
 
     setGraph();
     //graph();
+
+    document.getElementById("objects").checked = true;
+
     console.log(mcon);
     console.log(engine);
     console.log(ground);
@@ -110,6 +113,18 @@ function addObj(){
     new_Obj(count);
     boxes.push(new Box(getRandom(width),getRandom(height),20));  
     //console.log(boxes[0]);
+
+    chart.data.datasets.push(
+        {
+            label: labels[count],
+            data: [ke[count-1]],
+            borderColor: [
+                colors[count-1]
+            ],
+            borderWidth: 1
+        }
+    )    
+
     count++;
 }
 function start(){
@@ -133,11 +148,7 @@ function reset(){
     for(let i=0;i<boxes.length;i++){
         boxes[i].reset();
     }
-    chart.data.datasets[0].data = [ke]
-    chart.data.datasets[1].data = [pe]
-    //graphUpdate = true;
-    //onGraphUpdate("gUpdate");
-    chart.update();
+    document.getElementById("objects").checked = true;
 }
 
 function objReset(clicked){
@@ -170,29 +181,18 @@ function onGraphUpdate(clicked){
 
 //////     ---------GRAPH-----------
 
+colors = ['red','green','blue'];
+labels = ['KE','PE','Velocity'];
+
 function setGraph(){
     var ctx = document.getElementById('chart');
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [CLICK],
-            datasets: [{
-                label: 'KE',
-                data: [ke],
-            
-                borderColor: [
-                    'red'
-                ],
-                borderWidth: 1
-            },{
-            label: 'PE',
-                data: [pe],
-            
-                borderColor: [
-                    'green'
-                ],
-                borderWidth: 1
-            }]
+            datasets: [
+
+            ]
         },
         options: {
             scales: {
@@ -208,6 +208,18 @@ function setGraph(){
 
 ////    --------UPDATE---------
 
+function RadioCheck(){
+    for(let i=0;i<boxes.length;i++){
+        if(document.getElementById("rad"+(i+1)).checked){
+            updateGraph(i);
+        }
+    }
+
+    if(document.getElementById("objects").checked){
+        updateGraph(null);
+    }
+}
+
 function updateInnerArray(){
     for(let i=0;i<boxes.length;i++){
         vels[i] = resultant(boxes[i].body.velocity);
@@ -216,13 +228,31 @@ function updateInnerArray(){
     }
 }
 
-function updateGraph(){
+function updateGraph(index){
     if(graphUpdate){
-        chart.data.labels.push((CLICK).toFixed(2));
-        chart.data.datasets[0].data.push(ke);
-        chart.data.datasets[1].data.push(pe);
-        chart.update();
+        //chart.data.datasets = [];
+        if(index!=null){
+            for(let i=0;i<3;i++){
+                chart.data.datasets.push(
+                    {
+                        label: labels[i],
+                        data: [ke[index]],
+                    
+                        borderColor: [
+                            colors[i]
+                        ],
+                        borderWidth: 1
+                    }
+                )
+            }
+            
+        }else{
+            for(let i=0;i<boxes.length;i++){
+                chart.data.datasets[i].data.push(ke[i]);
+            }
+        }
     }
+    chart.update();
 }
 
 function deltaPos(){
@@ -238,14 +268,15 @@ function updateLable(){
     try{
     if(boxes.length){
     for(let i=0;i<boxes.length;i++){
-        ke = boxes[i].energy.KE;
-        pe = boxes[i].energy.PE;
-        document.getElementById(String("vel_va"+(i+1))).innerText =boxes[i].energy.VEL;
-        document.getElementById(String("ke_va"+(i+1))).innerText = ke;
-        document.getElementById(String("pe_va"+(i+1))).innerText = pe;
+        ke[i] = boxes[i].energy.KE;
+        pe[i] = boxes[i].energy.PE;
+        vels[i] = boxes[i].energy.VEL;
+        document.getElementById(String("vel_va"+(i+1))).innerText = vels[i];
+        document.getElementById(String("ke_va"+(i+1))).innerText = ke[i];
+        document.getElementById(String("pe_va"+(i+1))).innerText = pe[i];
         document.getElementById(String("mas"+(i+1))).value = (boxes[i].body.mass).toFixed(2);
     }
-    updateGraph();
+    RadioCheck();
     deltaPos();
     CLICK += 1e-3 * INTERVAL;
     }

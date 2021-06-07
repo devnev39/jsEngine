@@ -64,14 +64,21 @@ function new_Obj(count){
     cut.setAttribute("onclick","nullify(this.id)");
     cut.innerText = "Normalize Obj";
     
-
     div.append(node);
     div.append(vel_lb);
     div.append(ke_lb);
     div.append(pe_lb);
     div.append(resetObj);
     div.append(cut);
-    
-    
+
+    objDiv = document.getElementById("RadioDiv");
+    radio = document.createElement("input");
+    radio.setAttribute("type","radio");
+    radio.setAttribute("id","rad"+count);
+    label = document.createElement("label");
+    label.innerText = objName;
+    objDiv.append(radio);
+    objDiv.append(label)
+
     document.body.appendChild(div);
 }
