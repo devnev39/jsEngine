@@ -11,7 +11,6 @@ function Box(x,y,r){
     }
     this.body = Bodies.circle(x,y,r,param);
     World.add(world,this.body);
-   
 
     this.show = function(){
         pos = this.body.position;

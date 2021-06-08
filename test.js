@@ -12,7 +12,11 @@ var Engine = Matter.Engine,
 let engine;
 let world;
 let mouse;
+
 var ground;
+var up;
+var right;
+var left;
 
 let INTERVAL = 500;
 let CLICK = 0.0;
@@ -64,8 +68,11 @@ function setup(){
     }
     
     ground = Bodies.rectangle(400,height+24,width,50,{isStatic : true});
-    ground.restitution = rest;    
-    World.add(world,ground);
+    up = Bodies.rectangle(400,-24,width,50,{isStatic : true}); 
+    right = Bodies.rectangle(824,height/2,50,height,{isStatic : true}); 
+    left = Bodies.rectangle(-24,height/2,50,height,{isStatic : true}); 
+
+    World.add(world,[ground,up,left,right]);
     World.add(world,boxes);
 
     mouse = Mouse.create(canvas.elt);
@@ -93,6 +100,8 @@ function setup(){
 }
 
 function draw(){
+    rest = document.getElementById("rest_inp").value;
+    rest = rest ? rest : 0; 
     background(51);
     if(boxes.length>0){
     updateInnerArray();
@@ -104,6 +113,9 @@ function draw(){
     stroke(255);
     rectMode(CENTER);
     rect(400,height+24,width,50);
+    rect(400,-24,width,50);
+    rect(824,height/2,50,height);
+    rect(-24,height/2,50,height);
 
     if(mouse.body){
         pos = mouse.body.position;
