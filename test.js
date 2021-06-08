@@ -28,6 +28,8 @@ let vels = [];
 let angs = [];
 let mass = [];
 
+let zeros = [];
+
 prop = function(){
     this.ke = 0;
     this.pe = 0;
@@ -149,9 +151,9 @@ function reset(){
     for(let i=0;i<boxes.length;i++){
         boxes[i].reset();
         chartObjFrames[i].data = [ObjProps[i].KE];
-        chartObjPropFrames[i][0].data = [ObjProps[i].KE];
-        chartObjFrames[i][1].data = [ObjProps[i].PE];
-        chartObjFrames[i][2].data = [ObjProps[i].VEL];
+        chartObjPropFrame[i][0].data = [ObjProps[i].KE];
+        chartObjPropFrame[i][1].data = [ObjProps[i].PE];
+        chartObjPropFrame[i][2].data = [ObjProps[i].VEL];
     }
     chart.update();
 }
@@ -248,7 +250,7 @@ object_prop = function(c){
         datasets.push(
             {
                 label : labels[i],
-                data : [arr[i]],
+                data : zeros.concat([arr[i]]),
                 borderColor: [
                     colors[i]
                 ],
@@ -263,7 +265,7 @@ object_prop = function(c){
 objects = function(c){
         return{
             label: objs[c-1],
-            data: [ObjProps[c-1].KE],
+            data: zeros.concat([ObjProps[c-1].KE]),
         
             borderColor: [
                 colors[c-1]
@@ -298,16 +300,15 @@ function updateInnerArray(){
 
 function updateGraph(index){
     if(graphUpdate){
+        chart.data.labels.push((CLICK).toFixed(2));
         //chart.data.datasets = [];
-        if(index!=null){
-            chart.data.labels.push((CLICK).toFixed(2));
+        if(index!=null){ 
             for(let i=0;i<3;i++){
                 chart.data.datasets[i] = chartObjPropFrame[index][i];
             }
             chart.update();
         }
-        else{  
-               chart.data.labels.push((CLICK).toFixed(2));          
+        else{          
                chart.data.datasets = chartObjFrames;
                chart.update(); 
             }
@@ -345,6 +346,7 @@ function updateLable(){
         }
         chartObjFrames[i].data.push(ObjProps[i].KE);
         }
+        zeros.push(0);
     }
     RadioCheck();
     deltaPos();
