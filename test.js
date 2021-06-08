@@ -67,10 +67,10 @@ function setup(){
         frictionAir : 0
     }
     
-    ground = Bodies.rectangle(400,height+24,width,50,{isStatic : true});
-    up = Bodies.rectangle(400,-24,width,50,{isStatic : true}); 
-    right = Bodies.rectangle(824,height/2,50,height,{isStatic : true}); 
-    left = Bodies.rectangle(-24,height/2,50,height,{isStatic : true}); 
+    ground = Bodies.rectangle(400,height+24,width+10,50,{isStatic : true});
+    up = Bodies.rectangle(400,-24,width+10,50,{isStatic : true}); 
+    right = Bodies.rectangle(824,height/2,50,height+10,{isStatic : true}); 
+    left = Bodies.rectangle(-24,height/2,50,height+10,{isStatic : true}); 
 
     World.add(world,[ground,up,left,right]);
     World.add(world,boxes);
@@ -90,6 +90,7 @@ function setup(){
     //setInterval(deltaPos,INTERVAL);
 
     setGraph();
+    chart.data.datasets = chartObjFrames;
     //graph();
 
     document.getElementById("objects").checked = true;
@@ -101,7 +102,8 @@ function setup(){
 
 function draw(){
     rest = document.getElementById("rest_inp").value;
-    rest = rest ? rest : 0; 
+    rest = rest ? rest : 0;
+    ground.restitution = up.restitution = left.restitution = right.restitution = rest;
     background(51);
     if(boxes.length>0){
     updateInnerArray();
@@ -133,6 +135,7 @@ function addObj(){
     ObjProps.push(new prop());
     addChartFrame(count);
     //console.log(boxes[0]);    
+    document.getElementById("mas"+(count)).value = (boxes[count-1].body.mass).toFixed(2);
     count++;
 }
 
@@ -191,13 +194,13 @@ function onGraphUpdate(clicked){
 
 function radioChange(clicked){
     if(clicked.id=="objects"){
-        chart.data.datasets = [];
-        chart.update();
+        // chart.data.datasets = [];
+        // chart.update();
         chart.data.datasets = chartObjFrames;
         chart.update();
     }else{
-        chart.data.datasets = [];
-        chart.update();
+        // chart.data.datasets = [];
+        // chart.update();
         for(let i=0;i<boxes.length;i++){
             if(clicked.id == "rad"+(i+1)){
                 chart.data.datasets = chartObjPropFrame[i];
@@ -241,7 +244,6 @@ function setGraph(){
 function addChartFrame(c){
     chartObjFrames.push(objects(c));
     chartObjPropFrame.push(object_prop(c));
-    chart.data.datasets = chartObjFrames;
     chart.update();
 }
 
@@ -278,8 +280,6 @@ objects = function(c){
 
 ////    --------UPDATE---------
 
-let chartUsedByObject = false;
-
 function RadioCheck(){
     for(let i=0;i<boxes.length;i++){
         if(document.getElementById("rad"+(i+1)).checked){
@@ -304,9 +304,7 @@ function updateGraph(index){
     if(graphUpdate){
         chart.data.labels.push((CLICK).toFixed(2));
         if(index!=null){ 
-            for(let i=0;i<3;i++){
-                chart.data.datasets[i] = chartObjPropFrame[index][i];
-            }
+            chart.data.datasets = chartObjPropFrame[index];
             chart.update();
         }
         else{          
@@ -338,7 +336,6 @@ function updateLable(){
         document.getElementById(String("vel_va"+(i+1))).innerText = boxes[i].energy.VEL;
         document.getElementById(String("ke_va"+(i+1))).innerText = boxes[i].energy.KE;
         document.getElementById(String("pe_va"+(i+1))).innerText = boxes[i].energy.PE;
-        document.getElementById(String("mas"+(i+1))).value = (boxes[i].body.mass).toFixed(2);
         if(graphUpdate){
         let arr = [ObjProps[i].KE,ObjProps[i].PE,ObjProps[i].VEL];
         for(let j=0;j<3;j++)
