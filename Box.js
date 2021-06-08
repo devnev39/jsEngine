@@ -3,7 +3,7 @@ function Box(x,y,r){
     this.yr = y;
     this.r = r;
     this.energy = new Energy(this);
-    //setInterval(this.energy.updateE,INTERVAL);
+    
     param = {
         friction : 0,
         frictionStatic : 0,
@@ -11,7 +11,7 @@ function Box(x,y,r){
     }
     this.body = Bodies.circle(x,y,r,param);
     World.add(world,this.body);
-   // setInterval(updateLable,1000);
+   
 
     this.show = function(){
         pos = this.body.position;

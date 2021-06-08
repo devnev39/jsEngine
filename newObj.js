@@ -1,8 +1,9 @@
 function new_Obj(count){
     if(count==4){
-        alert("Only three objects capable.")
+        alert("Only three objects allowed.")
         return;
     }
+    
     objName = "object"+String(count);
     div = document.createElement("div");
     div.setAttribute("id",objName);

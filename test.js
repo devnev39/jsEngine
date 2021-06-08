@@ -62,9 +62,7 @@ function setup(){
         frictionStatic : 0,
         frictionAir : 0
     }
-    // for(let i=0;i<2;i++){
-    //     boxes.push(new Box(getRandom(800),getRandom(600),50,50));
-    // }
+    
     ground = Bodies.rectangle(400,height+24,width,50,{isStatic : true});
     ground.restitution = rest;    
     World.add(world,ground);
@@ -106,10 +104,6 @@ function draw(){
     stroke(255);
     rectMode(CENTER);
     rect(400,height+24,width,50);
-
-    // if(mouse.body){
-    //Events.on(mouse,"mousedown",objClicked());
-    //}
 
     if(mouse.body){
         pos = mouse.body.position;
@@ -167,12 +161,9 @@ function objReset(clicked){
 }
 
 function nullify(clicked){
-   // alert(clicked);
-    //alert(count);
     for(let i=0;i<count-1;i++){
         if(clicked==String("object"+(i+1))){
             boxes[i].changeState(0,0,0.6,mass[i],true);
-            //console.log('norm');
         }
     }
 }
@@ -192,7 +183,6 @@ function radioChange(clicked){
         chart.update();
         chart.data.datasets = chartObjFrames;
         chart.update();
-        //alert("s");
     }else{
         chart.data.datasets = [];
         chart.update();
@@ -301,7 +291,6 @@ function updateInnerArray(){
 function updateGraph(index){
     if(graphUpdate){
         chart.data.labels.push((CLICK).toFixed(2));
-        //chart.data.datasets = [];
         if(index!=null){ 
             for(let i=0;i<3;i++){
                 chart.data.datasets[i] = chartObjPropFrame[index][i];
