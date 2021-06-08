@@ -194,19 +194,9 @@ function onGraphUpdate(clicked){
 
 function radioChange(clicked){
     if(clicked.id=="objects"){
-        // chart.data.datasets = [];
-        // chart.update();
-        chart.data.datasets = chartObjFrames;
-        chart.update();
+        updateGraph(null);
     }else{
-        // chart.data.datasets = [];
-        // chart.update();
-        for(let i=0;i<boxes.length;i++){
-            if(clicked.id == "rad"+(i+1)){
-                chart.data.datasets = chartObjPropFrame[i];
-            }
-        }
-        chart.update();
+        updateGraph(int(clicked.id.charAt(3)-1));
     }
     
 }
