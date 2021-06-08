@@ -74,11 +74,13 @@ function new_Obj(count){
     objDiv = document.getElementById("RadioDiv");
     radio = document.createElement("input");
     radio.setAttribute("type","radio");
+    radio.setAttribute("name","radioInp");
+    radio.setAttribute("onchange","radioChange(this)");
     radio.setAttribute("id","rad"+count);
     label = document.createElement("label");
     label.innerText = objName;
-    objDiv.append(radio);
-    objDiv.append(label)
 
     document.body.appendChild(div);
+    objDiv.append(radio);
+    objDiv.append(label)
 }

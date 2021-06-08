@@ -14,7 +14,7 @@ let world;
 let mouse;
 var ground;
 
-let INTERVAL = 200;
+let INTERVAL = 500;
 let CLICK = 0.0;
 let graphUpdate = true;
 
@@ -28,8 +28,18 @@ let vels = [];
 let angs = [];
 let mass = [];
 
-let ke = [];
-let pe = [];
+prop = function(){
+    this.ke = 0;
+    this.pe = 0;
+    this.vel = 0;
+    return{
+    KE : this.ke,
+    PE : this.pe,
+    VEL : this.vel
+}}
+
+let ObjProps = []
+
 let chart;
 
 
@@ -112,21 +122,12 @@ function addObj(){
     
     new_Obj(count);
     boxes.push(new Box(getRandom(width),getRandom(height),20));  
-    //console.log(boxes[0]);
-
-    chart.data.datasets.push(
-        {
-            label: labels[count],
-            data: [ke[count-1]],
-            borderColor: [
-                colors[count-1]
-            ],
-            borderWidth: 1
-        }
-    )    
-
+    ObjProps.push(new prop());
+    addChartFrame(count);
+    //console.log(boxes[0]);    
     count++;
 }
+
 function start(){
     rest = document.getElementById("rest_inp").value;
     for(let i=0;i<count-1;i++){
@@ -147,8 +148,12 @@ function start(){
 function reset(){
     for(let i=0;i<boxes.length;i++){
         boxes[i].reset();
+        chartObjFrames[i].data = [ObjProps[i].KE];
+        chartObjPropFrames[i][0].data = [ObjProps[i].KE];
+        chartObjFrames[i][1].data = [ObjProps[i].PE];
+        chartObjFrames[i][2].data = [ObjProps[i].VEL];
     }
-    document.getElementById("objects").checked = true;
+    chart.update();
 }
 
 function objReset(clicked){
@@ -179,10 +184,33 @@ function onGraphUpdate(clicked){
     document.getElementById(clicked).innerText = "True";
 }
 
+function radioChange(clicked){
+    if(clicked.id=="objects"){
+        chart.data.datasets = [];
+        chart.update();
+        chart.data.datasets = chartObjFrames;
+        chart.update();
+        //alert("s");
+    }else{
+        chart.data.datasets = [];
+        chart.update();
+        for(let i=0;i<boxes.length;i++){
+            if(clicked.id == "rad"+(i+1)){
+                chart.data.datasets = chartObjPropFrame[i];
+            }
+        }
+        chart.update();
+    }
+    
+}
+
 //////     ---------GRAPH-----------
+let chartObjFrames = [];
+let chartObjPropFrame = [];
 
 colors = ['red','green','blue'];
 labels = ['KE','PE','Velocity'];
+objs = ['object1','object2','object3'];
 
 function setGraph(){
     var ctx = document.getElementById('chart');
@@ -206,7 +234,47 @@ function setGraph(){
     chart = myChart;
 }
 
+function addChartFrame(c){
+    chartObjFrames.push(objects(c));
+    chartObjPropFrame.push(object_prop(c));
+    chart.data.datasets = chartObjFrames;
+    chart.update();
+}
+
+object_prop = function(c){
+    let arr = [ObjProps[c-1].KE,ObjProps[c-1].PE,ObjProps[c-1].VEL];
+    datasets = [];
+    for(let i=0;i<arr.length;i++){
+        datasets.push(
+            {
+                label : labels[i],
+                data : [arr[i]],
+                borderColor: [
+                    colors[i]
+                ],
+                borderWidth: 1
+            }
+        )
+    }
+    arr = null;
+    return datasets;
+}
+
+objects = function(c){
+        return{
+            label: objs[c-1],
+            data: [ObjProps[c-1].KE],
+        
+            borderColor: [
+                colors[c-1]
+            ],
+            borderWidth: 1
+        }
+}
+
 ////    --------UPDATE---------
+
+let chartUsedByObject = false;
 
 function RadioCheck(){
     for(let i=0;i<boxes.length;i++){
@@ -216,7 +284,7 @@ function RadioCheck(){
     }
 
     if(document.getElementById("objects").checked){
-        updateGraph(null);
+         updateGraph(null);
     }
 }
 
@@ -232,27 +300,20 @@ function updateGraph(index){
     if(graphUpdate){
         //chart.data.datasets = [];
         if(index!=null){
+            chart.data.labels.push((CLICK).toFixed(2));
             for(let i=0;i<3;i++){
-                chart.data.datasets.push(
-                    {
-                        label: labels[i],
-                        data: [ke[index]],
-                    
-                        borderColor: [
-                            colors[i]
-                        ],
-                        borderWidth: 1
-                    }
-                )
+                chart.data.datasets[i] = chartObjPropFrame[index][i];
+            }
+            chart.update();
+        }
+        else{  
+               chart.data.labels.push((CLICK).toFixed(2));          
+               chart.data.datasets = chartObjFrames;
+               chart.update(); 
             }
             
-        }else{
-            for(let i=0;i<boxes.length;i++){
-                chart.data.datasets[i].data.push(ke[i]);
-            }
         }
-    }
-    chart.update();
+   
 }
 
 function deltaPos(){
@@ -268,13 +329,22 @@ function updateLable(){
     try{
     if(boxes.length){
     for(let i=0;i<boxes.length;i++){
-        ke[i] = boxes[i].energy.KE;
-        pe[i] = boxes[i].energy.PE;
-        vels[i] = boxes[i].energy.VEL;
-        document.getElementById(String("vel_va"+(i+1))).innerText = vels[i];
-        document.getElementById(String("ke_va"+(i+1))).innerText = ke[i];
-        document.getElementById(String("pe_va"+(i+1))).innerText = pe[i];
+        ObjProps[i].KE = boxes[i].energy.KE;
+        ObjProps[i].PE = boxes[i].energy.PE;
+        ObjProps[i].VEL = boxes[i].energy.VEL;
+
+        document.getElementById(String("vel_va"+(i+1))).innerText = boxes[i].energy.VEL;
+        document.getElementById(String("ke_va"+(i+1))).innerText = boxes[i].energy.KE;
+        document.getElementById(String("pe_va"+(i+1))).innerText = boxes[i].energy.PE;
         document.getElementById(String("mas"+(i+1))).value = (boxes[i].body.mass).toFixed(2);
+        if(graphUpdate){
+        let arr = [ObjProps[i].KE,ObjProps[i].PE,ObjProps[i].VEL];
+        for(let j=0;j<3;j++)
+        {
+            chartObjPropFrame[i][j].data.push(arr[j]);
+        }
+        chartObjFrames[i].data.push(ObjProps[i].KE);
+        }
     }
     RadioCheck();
     deltaPos();

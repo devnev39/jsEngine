@@ -65,9 +65,9 @@ Energy = function(box){
         //console.log(body.position);
         let vel = (resultant(box.body.velocity)).toFixed(2);
         let ke = +(0.5*box.body.mass*(vel**2)).toFixed(2);
-        pe = (box.body.mass*resultant(engine.gravity)*9.8*((height-box.body.position.y-box.r-0.7039)/60)/0.600).toFixed(2);
+        pE = (box.body.mass*resultant(engine.gravity)*9.8*((height-box.body.position.y-box.r-0.7039)/60)/0.600).toFixed(2);
         this.KE = ke;
-        this.PE = pe;
+        this.PE = pE;
         this.VEL = vel;
         return Energy;
     };
