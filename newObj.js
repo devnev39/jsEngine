@@ -7,6 +7,7 @@ function new_Obj(count){
     objName = "object"+String(count);
     div = document.createElement("div");
     div.setAttribute("id",objName);
+    //div.setAttribute("class","relative");
 
     node = document.createElement("p");
     node.innerText = objName;

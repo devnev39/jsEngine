@@ -159,6 +159,7 @@ function start(){
 function reset(){
     for(let i=0;i<boxes.length;i++){
         boxes[i].reset();
+        chart.data.labels = [(CLICK).toFixed(2)];
         chartObjFrames[i].data = [ObjProps[i].KE];
         chartObjPropFrame[i][0].data = [ObjProps[i].KE];
         chartObjPropFrame[i][1].data = [ObjProps[i].PE];
@@ -194,11 +195,13 @@ function onGraphUpdate(clicked){
 
 function radioChange(clicked){
     if(clicked.id=="objects"){
-        updateGraph(null);
+        if(graphUpdate){updateGraph(null);return;}
+        chart.data.datasets = chartObjFrames;
     }else{
-        updateGraph(int(clicked.id.charAt(3))-1);
+        if(graphUpdate){updateGraph(int(clicked.id.charAt(3))-1);return;}
+        chart.data.datasets = chartObjPropFrame[int(clicked.id.charAt(3))-1];
     }
-    
+    chart.update();
 }
 
 //////     ---------GRAPH-----------
@@ -298,7 +301,8 @@ function updateInnerArray(){
 
 function updateGraph(index){
     if(graphUpdate){
-        if(CLICK>=25.0){
+        if(chartObjFrames[0].data.length>=50){
+            console.log('Condition');
             chart.data.labels.splice(0,1);
             chart.data.labels.push((CLICK).toFixed(2));
             chartObjFrames.forEach(ele=>{
