@@ -196,7 +196,7 @@ function radioChange(clicked){
     if(clicked.id=="objects"){
         updateGraph(null);
     }else{
-        updateGraph(int(clicked.id.charAt(3)-1));
+        updateGraph(int(clicked.id.charAt(3))-1);
     }
     
 }
@@ -220,10 +220,16 @@ function setGraph(){
             ]
         },
         options: {
+            showLines : true,
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                      beginAtZero:true,
+                      min: 0,
+                      max: 100  
+                    }
+                  }]
             } ,
             responsive : false
         }
@@ -292,7 +298,21 @@ function updateInnerArray(){
 
 function updateGraph(index){
     if(graphUpdate){
-        chart.data.labels.push((CLICK).toFixed(2));
+        if(CLICK>=25.0){
+            chart.data.labels.splice(0,1);
+            chart.data.labels.push((CLICK).toFixed(2));
+            chartObjFrames.forEach(ele=>{
+                ele.data.splice(0,1);
+            });
+            chartObjPropFrame.forEach(obj=>{
+                obj.forEach(ele=>{
+                    ele.data.splice(0,1);
+                })
+            });
+        }else{
+            chart.data.labels.push((CLICK).toFixed(2));
+        }
+        //chart.update();
         if(index!=null){ 
             chart.data.datasets = chartObjPropFrame[index];
             chart.update();
@@ -302,7 +322,7 @@ function updateGraph(index){
                chart.update(); 
             }
             
-        }
+    }
    
 }
 
@@ -337,7 +357,7 @@ function updateLable(){
         zeros.push(0);
     }
     RadioCheck();
-    deltaPos();
+    //deltaPos();
     CLICK += 1e-3 * INTERVAL;
     }
     }catch(err){
