@@ -301,16 +301,21 @@ function updateInnerArray(){
 
 function updateGraph(index){
     if(graphUpdate){
-        if(chartObjFrames[0].data.length>=50){
+        if(chart.data.labels.length >= 50){
             console.log('Condition');
             chart.data.labels.splice(0,1);
+            zeros.splice(0,1);
             chart.data.labels.push((CLICK).toFixed(2));
             chartObjFrames.forEach(ele=>{
+                if(ele.data.length>=50){
                 ele.data.splice(0,1);
+                }
             });
             chartObjPropFrame.forEach(obj=>{
                 obj.forEach(ele=>{
+                    if(ele.data.length>=50){
                     ele.data.splice(0,1);
+                    }
                 })
             });
         }else{
@@ -357,8 +362,9 @@ function updateLable(){
             chartObjPropFrame[i][j].data.push(arr[j]);
         }
         chartObjFrames[i].data.push(ObjProps[i].KE);
-        }
         zeros.push(0);
+        }
+        
     }
     RadioCheck();
     //deltaPos();
