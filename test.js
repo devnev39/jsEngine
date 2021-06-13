@@ -54,7 +54,7 @@ function setup(){
     g = +document.getElementById("g_").value;
     console.log(rest);
     canvas = createCanvas(800,600);
-    canvas.position(300,30);
+    canvas.position(300,40);
     canvas.doubleClicked(clc_double);
     engine = Engine.create();
     engine.gravity.x = 0;
@@ -211,12 +211,19 @@ function objReset(clicked){
 }
 
 function nullify(clicked){
-    for(let i=0;i<count-1;i++){
-        if(clicked==String("object"+(i+1))){
-            boxes[i].changeState(0,0,0.6,mass[i],true);
-        }
-    }
+    boxes.forEach(ele=>{
+        if("object"+(boxes.indexOf(ele)+1) == clicked){
+            ele.changeState(0,0,0.6,mass[boxes.indexOf(ele)],true);
+        } 
+    })
 }
+
+function normalize_all(){
+    boxes.forEach(ele=>{
+        nullify("object"+(boxes.indexOf(ele)+1));
+    })
+}
+
 function onGraphUpdate(clicked){
     if(graphUpdate){
         graphUpdate = false;
@@ -335,16 +342,21 @@ function updateInnerArray(){
 
 function updateGraph(index){
     if(graphUpdate){
-        if(chartObjFrames[0].data.length>=50){
+        if(chart.data.labels.length >= 50){
             console.log('Condition');
             chart.data.labels.splice(0,1);
+            zeros.splice(0,1);
             chart.data.labels.push((CLICK).toFixed(2));
             chartObjFrames.forEach(ele=>{
+                if(ele.data.length>=50){
                 ele.data.splice(0,1);
+                }
             });
             chartObjPropFrame.forEach(obj=>{
                 obj.forEach(ele=>{
+                    if(ele.data.length>=50){
                     ele.data.splice(0,1);
+                    }
                 })
             });
         }else{
@@ -391,8 +403,9 @@ function updateLable(){
             chartObjPropFrame[i][j].data.push(arr[j]);
         }
         chartObjFrames[i].data.push(ObjProps[i].KE);
-        }
         zeros.push(0);
+        }
+        
     }
     RadioCheck();
     //deltaPos();
