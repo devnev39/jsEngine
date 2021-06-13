@@ -55,6 +55,7 @@ function setup(){
     console.log(rest);
     canvas = createCanvas(800,600);
     canvas.position(300,30);
+    canvas.doubleClicked(clc_double);
     engine = Engine.create();
     engine.gravity.x = 0;
     engine.gravity.y = g;
@@ -127,6 +128,11 @@ function draw(){
 }
 
 //////  --------  EVENTS -----------
+
+function clc_double(){
+    current = mouse.position;
+    
+}
 
 function addObj(){
     
