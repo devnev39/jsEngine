@@ -54,7 +54,7 @@ function setup(){
     g = +document.getElementById("g_").value;
     console.log(rest);
     canvas = createCanvas(800,600);
-    canvas.position(300,30);
+    canvas.position(300,40);
     engine = Engine.create();
     engine.gravity.x = 0;
     engine.gravity.y = g;
@@ -177,12 +177,19 @@ function objReset(clicked){
 }
 
 function nullify(clicked){
-    for(let i=0;i<count-1;i++){
-        if(clicked==String("object"+(i+1))){
-            boxes[i].changeState(0,0,0.6,mass[i],true);
-        }
-    }
+    boxes.forEach(ele=>{
+        if("object"+(boxes.indexOf(ele)+1) == clicked){
+            ele.changeState(0,0,0.6,mass[boxes.indexOf(ele)],true);
+        } 
+    })
 }
+
+function normalize_all(){
+    boxes.forEach(ele=>{
+        nullify("object"+(boxes.indexOf(ele)+1));
+    })
+}
+
 function onGraphUpdate(clicked){
     if(graphUpdate){
         graphUpdate = false;
