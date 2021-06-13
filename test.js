@@ -47,7 +47,7 @@ prop = function(){
 let ObjProps = []
 
 let chart;
-
+let last;
 
 function setup(){
     rest = +document.getElementById("rest_inp").value;
@@ -112,6 +112,7 @@ function draw(){
         boxes[i].show();
     }
     }
+    checkVectorSeq();
     fill(170);
     stroke(255);
     rectMode(CENTER);
@@ -121,6 +122,9 @@ function draw(){
     rect(-24,height/2,50,height);
 
     if(mouse.body){
+        if(single_clicked)
+            last = mouse.body;
+        console.log('last select');
         pos = mouse.body.position;
         fill(0,255,0);
         ellipse(pos.x,pos.y,20,20);
@@ -128,10 +132,34 @@ function draw(){
 }
 
 //////  --------  EVENTS -----------
-
+let single_clicked = true;
+let position;
 function clc_double(){
-    current = mouse.position;
-    
+    let x = mouseX , y = mouseY;
+    single_clicked = false;
+    position = [x,y];
+}
+
+function checkVectorSeq(){
+    if(!single_clicked){
+        stroke('red')
+        line(position[0],position[1],mouseX,mouseY);
+    }
+}
+
+function mouseClicked(){
+    if(!single_clicked){
+        single_clicked = true;
+        boxes.forEach(ele=>{
+            if(ele.body == last){
+                let slope = (mouseY-position[1]) / (mouseX - position[0]);
+                console.log(slope);
+                document.getElementById('ang'+(boxes.indexOf(ele)+1)).value = degrees(atan(-slope));
+            }
+        })
+        position = [];
+        last = null;
+    }
 }
 
 function addObj(){
