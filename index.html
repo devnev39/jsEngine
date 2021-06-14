@@ -1,0 +1,51 @@
+    <!DOCTYPE html>
+    <html>
+    <title>Test</title>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <style>
+    body {padding : 0; margin: 0;}
+    button.relative{
+        position: relative;
+        left: 20px;
+        top: 10px;
+        padding: 5px 10px;
+        margin: 5px 5px;
+        display: inline-block;
+    }
+    </style>
+    <body>
+        <script language="javascript" type="text/javascript" src="matter.js"></script>
+        <script language="javascript" type="text/javascript" src="test.js"></script>
+        <script language="javascript" type="text/javascript" src="p5.js"></script>
+        <script language="javascript" type="text/javascript" src="Box.js"></script>        
+        <script language="javascript" type="text/javascript" src="newObj.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script language="javascript" type="text/javascript" src="chart.min.js"></script>
+
+        <button class="relative" id="button" onclick="addObj()">Add Object</button>
+        <button class="relative" id="start" style="background-color:rgb(159, 244, 159)" onclick="start()">Start</button>
+        <button class="relative" id="reset" style="background-color:rgba(245, 95, 95, 0.845)" onclick="reset()">Reset</button>
+        <button class="relative" id="reset" onclick="normalize_all()">Normalize All</button>
+
+        <label style="position:absolute; top: 50px; left: 1120px;">
+            Restitution : 
+            <input type="text" id="rest_inp" value="0.6"></input>
+        </label>
+        <label style="position:absolute; top: 100px; left: 1120px;">
+            g (1=9.8)  : 
+            <input type="text" id="g_" value="0"></input>
+        </label>
+        <label style="position:absolute; top: 500px; left: 1120px;"> Update Graph : 
+        <button id="gUpdate" onclick="onGraphUpdate(this.id)">False</button>
+        </label>
+        <canvas id="chart" style="position: absolute; top: 650px; left: 300px; height: 300px;width: 800px;">
+        </canvas>
+            <div id="RadioDiv" style="position: relative; top: 650px; left: 1150px;">
+            <input type="radio" name="radioInp" onchange="radioChange(this)" id="objects">
+            <label>Objects</label>
+            <br><br>
+        </div>
+    </body>
+    </html>
