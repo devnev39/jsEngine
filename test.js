@@ -105,7 +105,7 @@ function draw(){
     rest = document.getElementById("rest_inp").value;
     rest = rest ? rest : 0;
     ground.restitution = up.restitution = left.restitution = right.restitution = rest;
-    background(51);
+    background('#222222');
     if(boxes.length>0){
     updateInnerArray();
     for(let i=0;i<boxes.length;i++){
