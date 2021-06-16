@@ -11,12 +11,16 @@ function new_Obj(count){
     //div.setAttribute("class","relative");
 
     node = document.createElement("p");
-    node.setAttribute("style","text-align: center; color: red");
+    //node.setAttribute("align","center");
+    node.setAttribute("class","objhead");
     node.innerText = "Object "+count;
 
     vel = document.createElement("p");
+    vel.setAttribute("class","gL");
     angle = document.createElement("p");
+    angle.setAttribute("class","gL")
     mass = document.createElement("p");
+    mass.setAttribute("class","gL")
 
     angle.innerText = "Angle (degrees) : ";
     vel.innerText = "Velocity : ";
