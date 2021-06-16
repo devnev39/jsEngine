@@ -55,11 +55,13 @@ function new_Obj(count){
     pe_lb.append(pe_va);
 
     resetObj = document.createElement("button");
+    resetObj.setAttribute("class","obj");
     resetObj.setAttribute("id",objName);
     resetObj.setAttribute("onclick","objReset(this.id)");
     resetObj.innerText = "Reset Object";
 
     cut = document.createElement("button");
+    cut.setAttribute("class","obj");
     cut.setAttribute("id",objName);
     cut.setAttribute("onclick","nullify(this.id)");
     cut.innerText = "Normalize Obj";
