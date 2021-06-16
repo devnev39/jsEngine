@@ -175,11 +175,11 @@ function addObj(){
 function start(){
     rest = document.getElementById("rest_inp").value;
     for(let i=0;i<count-1;i++){
-        str = String("object"+(i+1));
-        ele = document.getElementById(str);
-        angs[i] = (+ele.childNodes[0].childNodes[2].childNodes[1].value);
-        vels[i] = (+ele.childNodes[0].childNodes[1].childNodes[1].value);
-        mass[i] = (+ele.childNodes[0].childNodes[3].childNodes[1].value);
+        s = String("object"+(i+1));
+        ele = document.getElementById(s);
+        angs[i] = (+ele.childNodes[2].childNodes[1].value);
+        vels[i] = (+ele.childNodes[1].childNodes[1].value);
+        mass[i] = (+ele.childNodes[3].childNodes[1].value);
     }
     if((boxes.length==vels.length)&&(boxes.length==angs.length)){
     for(let i=0;i<boxes.length;i++){
