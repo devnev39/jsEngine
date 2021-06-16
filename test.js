@@ -162,7 +162,10 @@ function mouseClicked(){
 }
 
 function addObj(){
-    
+    if(count==4){
+        new_Obj(count);
+        return;
+    }
     new_Obj(count);
     boxes.push(new Box(getRandom(width),getRandom(height),20));  
     ObjProps.push(new prop());
