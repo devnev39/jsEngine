@@ -1,4 +1,4 @@
-This is a Javascirpt matter engine. It can simulate conllisions and can give upto 96% precise energies with respect to clock.
+This is a Javascirpt matter engine. It can simulate collisions and can give upto 96% precise energies with respect to clock.
 
 To not face any error do as follow ->
 
