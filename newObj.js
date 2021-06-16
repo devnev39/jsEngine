@@ -7,10 +7,12 @@ function new_Obj(count){
     objName = "object"+String(count);
     div = document.createElement("div");
     div.setAttribute("id",objName);
+    div.setAttribute("class","obj");
     //div.setAttribute("class","relative");
 
     node = document.createElement("p");
-    node.innerText = objName;
+    node.setAttribute("style","text-align: center; color: red");
+    node.innerText = "Object "+count;
 
     vel = document.createElement("p");
     angle = document.createElement("p");
@@ -32,10 +34,6 @@ function new_Obj(count){
     vel.append(vel_inp);
     angle.append(ang_inp);
     mass.append(mas_inp);
-
-    node.append(vel);
-    node.append(angle);
-    node.append(mass);
 
     vel_lb = document.createElement("p")
     vel_va = document.createElement("label")
@@ -67,6 +65,9 @@ function new_Obj(count){
     cut.innerText = "Normalize Obj";
     
     div.append(node);
+    div.append(vel);
+    div.append(angle);
+    div.append(mass);
     div.append(vel_lb);
     div.append(ke_lb);
     div.append(pe_lb);
