@@ -24,7 +24,7 @@ function Box(x,y,r){
         rotate(angle);
         rectMode(CENTER);
         ellipse(0,0,this.r*2);
-        fill('white')
+        fill('white');
         line(0,0,this.r,0)
         rotate(-angle);
         //sfill('red');
