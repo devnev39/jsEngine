@@ -20,13 +20,14 @@ function Box(x,y,r){
         push();
         translate(pos.x,pos.y);
         stroke(255);
-        fill(170);
+        fill(objc[this.c-1]);
         rotate(angle);
         rectMode(CENTER);
         ellipse(0,0,this.r*2);
+        fill('white')
         line(0,0,this.r,0)
         rotate(-angle);
-        fill('red');
+        //sfill('red');
         textSize(15);
         text(this.c,0,0);
         pop();

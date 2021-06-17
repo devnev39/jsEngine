@@ -49,6 +49,11 @@ let ObjProps = []
 let chart;
 let last;
 
+colors = ['red','green','blue'];
+objc = ['#FF4130','#62E160','#5651FF'];
+labels = ['KE','PE','Velocity'];
+objs = ['object1','object2','object3'];
+
 function setup(){
     rest = +document.getElementById("rest_inp").value;
     g = +document.getElementById("g_").value;
@@ -250,10 +255,6 @@ function radioChange(clicked){
 //////     ---------GRAPH-----------
 let chartObjFrames = [];
 let chartObjPropFrame = [];
-
-colors = ['red','green','blue'];
-labels = ['KE','PE','Velocity'];
-objs = ['object1','object2','object3'];
 
 function setGraph(){
     var ctx = document.getElementById('chart');
