@@ -30,6 +30,6 @@ p.objhead{
 p.gL{
     border-inline-start: solid; 
     border-inline-color: rgb(7, 236, 7);
-    text-align: right;
+    text-align:center;
     font-size: 16px;
 }
