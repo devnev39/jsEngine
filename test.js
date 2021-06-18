@@ -424,7 +424,7 @@ function updateLable(){
         
     }
     RadioCheck();
-    deltaPos();
+    //deltaPos();
     CLICK += 1e-3 * INTERVAL;
     }
     }catch(err){
