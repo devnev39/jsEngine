@@ -158,7 +158,7 @@ function mouseClicked(){
             if(ele.body == last){
                 v0 = createVector(ele.body.position.x,0);
                 v1 = createVector(mouseX-ele.body.position.x,mouseY-ele.body.position.y);
-                document.getElementById('ang'+(boxes.indexOf(ele)+1)).value = degrees(-v0.angleBetween(v1));
+                document.getElementById('ang'+(boxes.indexOf(ele)+1)).value = degrees(-v0.angleBetween(v1)).toFixed(2);
             }
         })
         position = [];
