@@ -53,6 +53,8 @@ colors = ['red','green','blue'];
 objc = ['#FF4130','#62E160','#5651FF'];
 labels = ['KE','PE','Velocity'];
 objs = ['object1','object2','object3'];
+gPl = {'Earth':[9.8,1],'Moon':[1.2,0.1653],'Mars':[3.721,0.3796]}
+let selected = 'Earth';
 
 function setup(){
     rest = +document.getElementById("rest_inp").value;
@@ -252,6 +254,17 @@ function radioChange(clicked){
     chart.update();
 }
 
+function gravityChanged(){
+    selected = document.getElementById("gpl").value;
+    ele = document.getElementsByClassName("lrEL")[1];
+    ele.innerText = 'g (1='+gPl[selected][0]+')  : ';
+    i = document.createElement("input");
+    i.setAttribute("id","g_");
+    i.setAttribute("type","text");
+    i.setAttribute("value","0");
+    ele.append(i);
+}
+
 //////     ---------GRAPH-----------
 let chartObjFrames = [];
 let chartObjPropFrame = [];
@@ -382,13 +395,13 @@ function updateGraph(index){
 function deltaPos(){
     if(boxes.length && (boxes[0].body.velocity.y > 0.001)){ 
         console.log(boxes[0].body.velocity);
-        console.log((height-boxes[0].body.position.y-boxes[0].r-0.7039)/60); 
+        console.log((height-boxes[0].body.position.y)/60); 
         console.log((CLICK).toFixed(2));
     }
 }
 
 function updateLable(){
-    engine.gravity.y = +document.getElementById("g_").value*0.600;    
+    engine.gravity.y = +document.getElementById("g_").value*gPl[selected][1]*0.600;    
     try{
     if(boxes.length){
     for(let i=0;i<boxes.length;i++){
@@ -411,7 +424,7 @@ function updateLable(){
         
     }
     RadioCheck();
-    //deltaPos();
+    deltaPos();
     CLICK += 1e-3 * INTERVAL;
     }
     }catch(err){

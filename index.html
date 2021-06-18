@@ -33,6 +33,11 @@
             g (1=9.8)  : 
             <input type="text" id="g_" value="0"></input>
         </p>
+        <select id="gpl" onchange="gravityChanged()">
+            <option value="Earth">Earth</option>
+            <option value="Moon">Moon</option>
+            <option value="Mars">Mars</option>
+          </select>
         <p style="position:absolute; bottom: 10px;"> Update Graph : 
         <button id="gUpdate" onclick="onGraphUpdate(this.id)">False</button>
         </p>
