@@ -19,17 +19,24 @@
     <button class="relative" id="reset" style="background-color:rgba(245, 95, 95, 0.845)" onclick="reset()">Reset</button>
     <button class="relative" id="reset" onclick="normalize_all()">Normalize All</button>
 
-    <label style="position:relative; left: 770px; top:50px;">
-        Restitution : 
-        <input type="text" id="rest_inp" value="0.6"></input>
-    </label>
-    <label style="position:relative; left: 530px; top:100px;">
-        g (1=9.8)  : 
-        <input type="text" id="g_" value="0"></input>
-    </label>
-    <label style="position:absolute; top: 500px; left: 1120px;"> Update Graph : 
-    <button id="gUpdate" onclick="onGraphUpdate(this.id)">False</button>
-    </label>
+    <div class="divMain" id="mainDiv">
+
+    </div>
+
+    <div class="rEL">
+        <p class="lrEL">
+            Restitution : 
+            <input type="text" id="rest_inp" value="0.6"></input>
+        </p>
+        <br>
+        <p class="lrEL">
+            g (1=9.8)  : 
+            <input type="text" id="g_" value="0"></input>
+        </p>
+        <p style="position:absolute; bottom: 10px;"> Update Graph : 
+        <button id="gUpdate" onclick="onGraphUpdate(this.id)">False</button>
+        </p>
+    </div>
     <canvas id="chart" style="position: absolute; top: 650px; left: 300px; height: 300px;width: 800px;">
     </canvas>
         <div id="RadioDiv" style="position: relative; top: 650px; left: 1150px;">

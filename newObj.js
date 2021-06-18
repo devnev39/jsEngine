@@ -3,7 +3,8 @@ function new_Obj(count){
         alert("Only three objects allowed.")
         return;
     }
-    
+    mainDiv = document.getElementById("mainDiv");
+
     objName = "object"+String(count);
     div = document.createElement("div");
     div.setAttribute("id",objName);
@@ -89,7 +90,7 @@ function new_Obj(count){
     label = document.createElement("label");
     label.innerText = objName;
 
-    document.body.appendChild(div);
+    mainDiv.append(div);
     objDiv.append(radio);
     objDiv.append(label)
 }
