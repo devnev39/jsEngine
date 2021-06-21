@@ -13,6 +13,10 @@ button.relative{
     margin: 5px 5px;
     border-radius: 5px;
 }
+button.relative:hover{
+    border: 2px solid #18d818;
+    border-radius: 8px;
+}
 div.obj{
     position: relative;
     height: 300px;
