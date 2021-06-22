@@ -393,9 +393,10 @@ function updateGraph(index){
 }
 
 function deltaPos(){
-    if(boxes.length && (boxes[0].body.velocity.y > 0.001)){ 
+    if(boxes.length && (resultant(boxes[0].body.velocity) > 0.001)){ 
         console.log(boxes[0].body.velocity);
         console.log((height-boxes[0].body.position.y)/60); 
+        console.log("pos : ",boxes[0].body.position);
         console.log((CLICK).toFixed(2));
     }
 }
@@ -424,7 +425,7 @@ function updateLable(){
         
     }
     RadioCheck();
-    //deltaPos();
+    deltaPos();
     CLICK += 1e-3 * INTERVAL;
     }
     }catch(err){
