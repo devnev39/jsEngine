@@ -2,7 +2,7 @@
 float: left;
 background-color: inherit;
 color: black;
-padding: 22px 16px;
+padding: 30px;
 width: 33.3%;
 border: none;
 outline: none;
@@ -24,7 +24,7 @@ background-color: #ccc;
 
 /* Style the tab content */
 .tabcontent {
-display: block;
+display: none;
 }
 
 div.ed1{
@@ -36,6 +36,13 @@ div.ed1{
 }
 
 div.ed2{
-   padding: 20px;
+   float: right;
    height: 200px;
+}
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
