@@ -33,6 +33,8 @@ div.ed1{
     background-color: skyblue;
     padding: 20px;
     font-family: "monaco", monospace;
+    border: solid red 2px;
+    border-radius: 10px;
 }
 
 div.ed2{
