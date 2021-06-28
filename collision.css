@@ -25,14 +25,17 @@ background-color: #ccc;
 /* Style the tab content */
 .tabcontent {
 display: block;
-padding: 50px;
-border: 1px solid #ccc;
-text-align: center;
 }
 
 div.ed1{
     float: left;
     width: 70%;
-    color: red;
-    background-color: palegreen;
+    background-color: skyblue;
+    padding: 20px;
+    font-family: "monaco", monospace;
+}
+
+div.ed2{
+   padding: 20px;
+   height: 200px;
 }

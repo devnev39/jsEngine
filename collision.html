@@ -6,29 +6,44 @@
 </head>
 <body>
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Elastic</button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">Inelastic</button>  
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Pure Inelastic</button>
+        <button class="tablinks" onclick="Change(event, 'EL')" id="defaultOpen">Elastic</button>
+        <button class="tablinks" onclick="Change(event, 'IEL')">Inelastic</button>  
+        <button class="tablinks" onclick="Change(event, 'PIEL')">Partially Inelastic</button>
       </div>
-<div id="London" class="tabcontent">
+<div id="EL" class="tabcontent">
     <div class="ed1">
-        <h1>This is test to check the width percentage of the ed1</h1>
+        <h1 style="text-decoration: underline; font-weight: bold;">
+            Elastic Collision</h1>
+        <h2>
+            In elastic collision the total kinetic energy of all the bodies under consideration remains
+            constant. The coefficient of restitution for this kind of collision is always 1. The energy
+            is not converted to heat , noise or potential energy but converted to kinetic energy itself.
+        </h2>
     </div>
     <div class="ed2">
-        <h1>This is ed1</h1>
+        <img style="padding: 20px;" src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Translational_motion.gif" width="300">
     </div>
 </div>
 
-<div id="Paris" class="tabcontent">
+<div id="IEL" class="tabcontent">
     <div class="ed1">
-
+        <h1 style="text-decoration: underline; font-weight: bold;">
+            Inelastic Collision
+        </h1>
+        <h2>
+        A perfectly inelastic collision occurs when the maximum amount of kinetic energy of a system is lost.
+        In a perfectly inelastic collision, i.e., a zero coefficient of restitution, the colliding particles stick together.
+        In such a collision, kinetic energy is lost by bonding the two bodies together. 
+        This bonding energy usually results in a maximum kinetic energy loss of the system. 
+        It is necessary to consider conservation of momentum.
+        <h2>
     </div>
     <div class="ed2">
-        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Collision_carts_inelastic.gif" width="300" style="padding: 20px;">
     </div>
 </div>
 
-<div id="Tokyo" class="tabcontent">
+<div id="PIEL" class="tabcontent">
     <div class="ed1">
 
     </div>
