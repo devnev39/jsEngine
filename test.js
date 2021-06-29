@@ -256,7 +256,7 @@ function radioChange(clicked){
 
 function gravityChanged(){
     selected = document.getElementById("gpl").value;
-    ele = document.getElementsByClassName("lrEL")[1];
+    ele = document.getElementsByClassName("lrEL")[2];
     ele.innerText = 'g (1='+gPl[selected][0]+')  : ';
     i = document.createElement("input");
     i.setAttribute("id","g_");

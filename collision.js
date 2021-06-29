@@ -1,14 +1,3 @@
-let canvas;
-
-function setup(){
-  canvas = createCanvas(500,200); 
-  canvas.position(50,500);
-}
-
-function draw(){
-  background('#222222');
-}
-
 function Change(evt, tab) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
