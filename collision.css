@@ -30,7 +30,6 @@ display: none;
 div.ed1{
     float: left;
     width: 70%;
-    background-color: skyblue;
     padding: 20px;
     font-family: "monaco", monospace;
     border: solid red 2px;
@@ -48,3 +47,7 @@ div.ed2{
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+#ec { background-color: rgb(255, 163, 179);}
+#iec { background-color: rgb(230, 124, 160);}
+#piec { background-color: rgb(244, 124, 124);}

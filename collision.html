@@ -9,13 +9,13 @@
 </head>
 <body>
     <div class="tab">
-        <button class="tablinks" onclick="Change(event, 'EL')" id="defaultOpen">Elastic</button>
-        <button class="tablinks" onclick="Change(event, 'IEL')">Inelastic</button>  
-        <button class="tablinks" onclick="Change(event, 'PIEL')">Partially Inelastic</button>
+        <button class="tablinks" onclick="Change(event, 'EL','rgb(255, 163, 179)')" id="defaultOpen">Elastic</button>
+        <button class="tablinks" onclick="Change(event, 'IEL','rgb(230, 124, 160)')">Inelastic</button>  
+        <button class="tablinks" onclick="Change(event, 'PIEL','rgb(244, 124, 124)')">Partially Inelastic</button>
     </div>
 
 <div id="EL" class="tabcontent">
-    <div class="ed1">
+    <div class="ed1" id="ec">
         <h1 style="text-decoration: underline; font-weight: bold;">
             Elastic Collision</h1>
         <h2>
@@ -30,7 +30,7 @@
 </div>
 
 <div id="IEL" class="tabcontent">
-    <div class="ed1">
+    <div class="ed1" id="iec">
         <h1 style="text-decoration: underline; font-weight: bold;">
             Inelastic Collision
         </h1>
@@ -48,7 +48,7 @@
 </div>
 
 <div id="PIEL" class="tabcontent">
-    <div class="ed1">
+    <div class="ed1" id="piec">
         <h1 style="text-decoration: underline; font-weight: bold;">
             Partially Inelastic Collision
         </h1>

@@ -1,4 +1,4 @@
-function Change(evt, tab) {
+function Change(evt, tab, color) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
@@ -7,9 +7,11 @@ function Change(evt, tab) {
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].style.backgroundColor = "white";
   }
   document.getElementById(tab).style.display = "block";
   evt.currentTarget.className += " active";
+  evt.currentTarget.style.backgroundColor = color;
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
