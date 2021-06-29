@@ -6,8 +6,10 @@ var Engine = Matter.Engine,
     Runner = Matter.Runner;
 
 let boxes = [];
-
+let def = 20;
+let redi = 6;
 function setup(){
+  document.getElementById("defaultOpen").click();
   canvas = createCanvas(500,300);
   canvas.position(500,500);
 
@@ -22,8 +24,10 @@ function setup(){
   right = Bodies.rectangle(width,height/2,30,height+10,{isStatic : true}); 
   left = Bodies.rectangle(0,height/2,30,height+10,{isStatic : true}); 
   ground.restitution = up.restitution=right.restitution=left.restitution = 1;
-  for(let i=0;i<20;i++){
-    boxes.push(new Box(getRandom(width),getRandom(height),5));
+
+  document.getElementById('n_inp').value = def;
+  for(let i=0;i<def;i++){
+    boxes.push(new Box(getRandom(width),getRandom(height),redi));
   }
 
   boxes.forEach(box=>{
@@ -34,7 +38,7 @@ function setup(){
   World.add(world,boxes);
   Runner.run(runner,engine);
 
-  setInterval(deltaPos,500);
+  setInterval(deltaPos,1000);
   
 }
 
@@ -58,7 +62,41 @@ function deltaPos(){
     te+=box.energy.TE;
   })
   console.log(te);
-  console.log(boxes[0].body.angularVelocity);
+}
+
+function n_changed(){
+  let n = +document.getElementById('n_inp').value;
+  if(n<41 && n>0){
+    val = n - def; 
+    if(val>=0){
+      while(val--){
+      bx = new Box(getRandom(width),getRandom(height),redi);
+      bx.changeState(5,radians(getRandom(360)),1,1);
+      boxes.push(bx);
+      }
+    }else{
+      while(val++){
+        boxes[-val].removeFromWorld();
+        boxes.splice(-val,1);
+      }
+    }
+    def = +document.getElementById('n_inp').value;
+  }else{
+    alert("Max 40 && Min 1");
+    document.getElementById("n_inp").value = 20;
+  }
+}
+
+function rotate_changed(obj){
+  if(obj.checked){
+    boxes.forEach(ele=>{
+      Body.setInertia(ele.body,(Math.PI/4)*(ele.r**4));
+    })
+  }else{
+    boxes.forEach(ele=>{
+      Body.setInertia(ele.body,Infinity);
+    })
+  }
 }
 
 function getRandom(max) {
@@ -81,4 +119,4 @@ function Change(evt, tab, color) {
   evt.currentTarget.style.backgroundColor = color;
 }
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+

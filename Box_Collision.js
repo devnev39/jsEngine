@@ -3,7 +3,8 @@ function Box(x,y,r){
     param = {
         friction : 0,
         frictionStatic : 0,
-        frictionAir : 0
+        frictionAir : 0,
+        inertia : Infinity
     }
     this.energy = new Energy(this);
     this.body = Bodies.circle(x,y,r,param);
@@ -28,6 +29,10 @@ function Box(x,y,r){
         pop();
     }
 
+    this.removeFromWorld = function(){
+        World.remove(world,this.body);
+    }
+
     this.changeState = function(vel,angle,restitution,mass,resetAng){
         this.body.restitution = restitution ? restitution : 0.6;
         ang = resetAng ? 0 : this.body.angularVelocity;
@@ -45,7 +50,7 @@ Energy = function(box){
         let vel = (resultant(box.body.velocity)).toFixed(2);
         let ang = box.body.angularVelocity;
         this.KE = +(0.5*box.body.mass*(vel**2)).toFixed(3);
-        this.RKE = +(0.75* box.body.mass* box.r**2 * ang**2).toFixed(3);
+        this.RKE = +(0.5* box.body.mass* box.r**2 * ang**2).toFixed(3);
         this.TE = this.KE + this.RKE;
         return Energy;
     };
