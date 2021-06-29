@@ -17,6 +17,10 @@ button.relative:hover{
     border: 2px solid #18d818;
     border-radius: 8px;
 }
+button.relative:active{
+    color: red;
+    background-color: palegreen;
+}
 div.obj{
     position: relative;
     height: 300px;
