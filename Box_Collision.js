@@ -34,7 +34,7 @@ function Box(x,y,r){
     }
 
     this.changeState = function(vel,angle,restitution,mass,resetAng){
-        this.body.restitution = restitution ? restitution : 0.6;
+        this.body.restitution = restitution;
         ang = resetAng ? 0 : this.body.angularVelocity;
         this.body.angle = 0;
         Body.setMass(this.body,mass);

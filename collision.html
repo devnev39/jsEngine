@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <script language="javascript" type="text/javascript" src="matter.js"></script>
     <script language="javascript" type="text/javascript" src="p5.js"></script>
-    <script language="javascript" type="text/javascript" src="Box_Collision.js"></script>
-    <script language="javascript" type="text/javascript" src="collision.js"></script>
+    <script language="javascript" type="text/javascript" src="Box_Collision.js" ></script>
     <link rel="stylesheet" href="collision.css">
+    <script language="javascript" type="text/javascript" src="collision.js"></script>
 </head>
 <body>
     <div class="tab">
-        <button class="tablinks" onclick="Change(event, 'EL','rgb(255, 163, 179)')" id="defaultOpen">Elastic</button>
-        <button class="tablinks" onclick="Change(event, 'IEL','rgb(230, 124, 160)')">Inelastic</button>  
-        <button class="tablinks" onclick="Change(event, 'PIEL','rgb(244, 124, 124)')">Partially Inelastic</button>
+        <button name="EC" class="tablinks" onclick="Change(event, 'EL','rgb(255, 163, 179)')" id="defaultOpen">Elastic</button>
+        <button name="IEC" class="tablinks" onclick="Change(event, 'IEL','rgb(230, 124, 160)')">Inelastic</button>  
+        <button name="PIEC" class="tablinks" onclick="Change(event, 'PIEL','rgb(244, 124, 124)')">Partially Inelastic</button>
     </div>
 
 <div id="EL" class="tabcontent">
@@ -23,12 +23,16 @@
             In elastic collision the total kinetic energy of all the bodies under consideration remains
             constant. The coefficient of restitution for this kind of collision is always 1. The energy
             is not converted to heat , noise or potential energy but converted to kinetic energy itself.
+            <br>
+            In the example below the kinetic energy is converted to kinetic energy itself. If you check the 
+            rotation checkbox the translational kinetic energy will be also converted to rotational kinetic 
+            energy.
         </h2>
     </div>
     <div class="ed2">
         <img style="padding: 20px;" src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Translational_motion.gif" width="300">
     </div>
-    <div class="controls" style="position: absolute; top: 500px; left: 50px; font-size: 25px;">
+    <div class="controls" style="position: absolute; top: 600px; left: 50px; font-size: 25px;">
         <label>Enter n : </label>
         <input type="text" onchange="n_changed()" id="n_inp">
         <br>
@@ -74,7 +78,7 @@
         <img src="https://media.giphy.com/media/kyRhs8taQA6tGGwd0q/giphy.gif" width="350" style="margin-top: 150px;">
     </div>
 </div>
-<main style="padding: 20px; height: 600px;">
+<main style="padding: 20px; position: relative; top:50px">
 
 </main>
 </body>
