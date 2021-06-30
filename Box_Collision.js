@@ -6,6 +6,7 @@ function Box(x,y,r){
         frictionAir : 0,
         inertia : Infinity
     }
+    this.filling = 'white';
     this.energy = new Energy(this);
     this.body = Bodies.circle(x,y,r,param);
     World.add(world,this.body);
@@ -17,7 +18,7 @@ function Box(x,y,r){
         push();
         translate(pos.x,pos.y);
         stroke(255);
-        fill('white');
+        fill(this.filling);
         rotate(angle);
         rectMode(CENTER);
         ellipse(0,0,this.r*2);

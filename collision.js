@@ -10,6 +10,8 @@ let def = 20;
 let redi = 6;
 let currentEvt;
 let invervalId;
+let rest = 0.6;
+
 function setup(){
   canvas = createCanvas(500,300);
   canvas.position(500,500);
@@ -48,6 +50,32 @@ function setup(){
     boxes[2].changeState(10,0,0,1,false);
     boxes[3].changeState(0,0,0,1,false);
     //invervalId = setInterval(setup,5000);
+  }
+  if(currentEvt.name == "PIEC"){
+    boxes = [];
+    ground.restitution = up.restitution=right.restitution=left.restitution = rest;
+    document.getElementById("rest_inp").value = rest;
+    let balls = 5;
+    let redi = 10;
+    let pos_w = width/2+50;
+    let pos_h = height/2;
+    for(let i=1;i<=balls;i++){
+      for(let j=1;j<=i;j++){
+        bx = new Box(pos_w+i,pos_h+j,redi);
+        if(document.getElementById("r_inp").checked){
+          Body.setInertia(bx.body,(Math.PI/4)*(redi**4));
+        }
+        bx.changeState(0,0,rest,1,false);
+        boxes.push(bx);
+      }
+    }
+    bx = new Box(30,pos_h,redi);
+    bx.filling='red';
+    boxes.push(bx);
+    setTimeout(function(){
+      boxes[boxes.length-1].changeState(15,0,rest,1,false);
+    },3000);
+    
   }  
   World.add(world,[ground,up,left,right]);
   World.add(world,boxes);
@@ -77,6 +105,15 @@ function deltaPos(){
     te+=box.energy.TE;
   })
   console.log(te);
+}
+
+function rest_changed(){
+  rest = +document.getElementById("rest_inp").value;
+  if(rest>1 || rest<0){
+    rest = 0.6;
+    alert("Restitution =>0  && <=1 !");
+  }
+  setup();
 }
 
 function n_changed(){
