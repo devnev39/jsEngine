@@ -42,6 +42,11 @@
             <option value="Moon">Moon</option>
             <option value="Mars">Mars</option>
           </select>
+        <br>
+        <p class="lrEL" id="rotate">
+            Rotation : 
+            <input type="checkbox" id="r_con" onchange="rotateChanged(this)"/>
+        </p> 
         <p style="position:absolute; bottom: 10px;"> Update Graph : 
         <button id="gUpdate" onclick="onGraphUpdate(this.id)">False</button>
         </p>

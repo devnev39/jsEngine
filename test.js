@@ -59,6 +59,7 @@ let selected = 'Earth';
 function setup(){
     rest = +document.getElementById("rest_inp").value;
     g = +document.getElementById("g_").value;
+    document.getElementById('r_con').checked = true;
     console.log(rest);
     canvas = createCanvas(800,600);
     canvas.position(300,50);
@@ -263,6 +264,18 @@ function gravityChanged(){
     i.setAttribute("type","text");
     i.setAttribute("value","0");
     ele.append(i);
+}
+
+function rotateChanged(obj){
+    if(obj.checked){
+        boxes.forEach(box=>{
+            Body.setInertia(box.body,(Math.PI/4)*(box.r**4));
+        })
+    }else{
+        boxes.forEach(box=>{
+            Body.setInertia(box.body,Infinity);
+        })
+    }
 }
 
 //////     ---------GRAPH-----------

@@ -60,3 +60,7 @@ p.lrEL{
     border-inline-start: solid;
     border-inline-color: rgb(7,236,7);
 }
+#rotate{
+    text-align: left;
+    padding: 5px;
+}
