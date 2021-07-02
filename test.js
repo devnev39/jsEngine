@@ -274,6 +274,7 @@ function rotateChanged(obj){
     }else{
         boxes.forEach(box=>{
             Body.setInertia(box.body,Infinity);
+            Body.setAngularVelocity(box.body,0);
         })
     }
 }
@@ -438,7 +439,7 @@ function updateLable(){
         
     }
     RadioCheck();
-    deltaPos();
+    //deltaPos();
     CLICK += 1e-3 * INTERVAL;
     }
     }catch(err){
