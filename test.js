@@ -48,6 +48,7 @@ let ObjProps = []
 
 let chart;
 let last;
+let rotationStat;
 
 colors = ['red','green','blue'];
 objc = ['#FF4130','#62E160','#5651FF'];
@@ -59,7 +60,7 @@ let selected = 'Earth';
 function setup(){
     rest = +document.getElementById("rest_inp").value;
     g = +document.getElementById("g_").value;
-    document.getElementById('r_con').checked = true;
+    document.getElementById('r_con').checked = rotationStat = true;
     console.log(rest);
     canvas = createCanvas(800,600);
     canvas.position(300,50);
@@ -268,10 +269,12 @@ function gravityChanged(){
 
 function rotateChanged(obj){
     if(obj.checked){
+        rotationStat = true;
         boxes.forEach(box=>{
             Body.setInertia(box.body,(Math.PI/4)*(box.r**4));
         })
     }else{
+        rotationStat = false;
         boxes.forEach(box=>{
             Body.setInertia(box.body,Infinity);
             Body.setAngularVelocity(box.body,0);

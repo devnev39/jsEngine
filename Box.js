@@ -51,6 +51,9 @@ function Box(x,y,r){
     this.reset = function(){
         World.remove(world,this.body);
         this.body = Bodies.circle(this.xr,this.yr,this.r,param);
+        if(!rotationStat){
+            Body.setInertia(this.body,Infinity);
+        }
         World.add(world,this.body);
     }
 }

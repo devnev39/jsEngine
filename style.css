@@ -60,7 +60,20 @@ p.lrEL{
     border-inline-start: solid;
     border-inline-color: rgb(7,236,7);
 }
-#rotate{
+button.obj{
+    border-radius: 10px;
+}
+button.obj:active{
+    background-color: skyblue;
+}
+button.obj:hover{
+    color: red;
+    border-color: red;
+}
+#rotation{
     text-align: left;
     padding: 5px;
+}
+#gpl{
+    margin-left: 150px;
 }

@@ -21,7 +21,7 @@ function new_Obj(count){
     angle = document.createElement("p");
     angle.setAttribute("class","gL")
     mass = document.createElement("p");
-    mass.setAttribute("class","gL")
+    mass.setAttribute("class","gL");
 
     angle.innerText = "Angle (degrees) : ";
     vel.innerText = "Velocity : ";
