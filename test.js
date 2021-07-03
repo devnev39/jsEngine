@@ -49,6 +49,7 @@ let ObjProps = []
 let chart;
 let last;
 let rotationStat;
+let unitInertia = 786.9532217767737;
 
 colors = ['red','green','blue'];
 objc = ['#FF4130','#62E160','#5651FF'];
@@ -271,7 +272,7 @@ function rotateChanged(obj){
     if(obj.checked){
         rotationStat = true;
         boxes.forEach(box=>{
-            Body.setInertia(box.body,(Math.PI/4)*(box.r**4));
+            Body.setInertia(box.body,(box.body.mass*unitInertia));
         })
     }else{
         rotationStat = false;
