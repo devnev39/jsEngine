@@ -24,7 +24,7 @@ button.relative:active{
 div.obj{
     position: relative;
     height: 300px;
-    width: 280px;
+    width: 300px;
     left: 20px;
 }
 button.obj{
@@ -49,7 +49,7 @@ p.gL{
 }
 div.rEL{
     position:relative;
-    left: 1120px;
+    left: 1150px;
     width: 250px;
     height: 500px;
     top:50px; 
@@ -76,4 +76,7 @@ button.obj:hover{
 }
 #gpl{
     margin-left: 150px;
+}
+#head{
+    width: 280px;
 }

@@ -64,7 +64,7 @@ function setup(){
     document.getElementById('r_con').checked = rotationStat = true;
     console.log(rest);
     canvas = createCanvas(800,600);
-    canvas.position(300,50);
+    canvas.position(320,50);
     canvas.doubleClicked(clc_double);
     engine = Engine.create();
     engine.gravity.x = 0;

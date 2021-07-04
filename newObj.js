@@ -14,6 +14,7 @@ function new_Obj(count){
     node = document.createElement("p");
     //node.setAttribute("align","center");
     node.setAttribute("class","objhead");
+    node.setAttribute("id","head");
     node.innerText = "Object "+count;
 
     vel = document.createElement("p");
