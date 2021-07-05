@@ -75,11 +75,13 @@ function Box(x,y,r){
             World.remove(world,this.body);
             if(sh=="Rect"){
                 this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
-                Body.setMass(this.body,masses[shapes.indexOf(this.shape)]);
+                console.log(masses);
+                Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Rect";
             }else{
                 this.body = Bodies.circle(this.xr,this.xr,this.r,param);
-                Body.setMass(this.body,masses[shapes.indexOf(this.shape)]);
+                console.log(masses);
+                Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Circle";
             }
             if(!rotationStat){
@@ -105,7 +107,12 @@ Energy = function(box){
         //console.log(body.position);
         let vel = (resultant(box.body.velocity)).toFixed(2);
         let ke = +(0.5*box.body.mass*(vel**2)).toFixed(2);
-        pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-box.r)/60)).toFixed(2);
+        let pE = 0;
+        if(box.shape=="Circle"){
+            pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-box.r)/60)).toFixed(2);
+        }else{
+            pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-(box.r*sizeMul/2))/60)).toFixed(2);
+        }
         this.KE = ke;
         this.PE = pE;
         this.VEL = vel;

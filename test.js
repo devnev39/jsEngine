@@ -22,7 +22,7 @@ let INTERVAL = 500;
 let CLICK = 0.0;
 let graphUpdate = false;
 let Inertias = [786.9532217767737,3750];
-let sizeMul = 1;
+let sizeMul = 2;
 
 var boxes = [];
    
@@ -307,9 +307,11 @@ function sizeChanged(size){
 function shapeChanged(){
     for (let index = 0; index < boxes.length; index++) {
         if(last == boxes[index].body){
+            console.log(masses);
             shapes[index] = document.getElementById("sh_inp").value;
             boxes[index].resetShape(shapes[index]);
             last = boxes[index].body;
+            console.log(masses);
         }    
     }
 }
@@ -408,9 +410,11 @@ function RadioCheck(){
 
 function updateInnerArray(){
     for(let i=0;i<boxes.length;i++){
-        vels[i] = resultant(boxes[i].body.velocity);
-        masses[i] = boxes[i].body.mass;
-        angs[i] = boxes[i].body.angularVelocity;
+        if(boxes[i].body){
+            vels[i] = resultant(boxes[i].body.velocity);
+            masses[i] = boxes[i].body.mass;
+            angs[i] = boxes[i].body.angularVelocity;
+        }
     }
 }
 
