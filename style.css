@@ -70,6 +70,12 @@ button.obj:hover{
     color: red;
     border-color: red;
 }
+.rOC{
+    text-indent: 15px;
+    width: 90%;
+    border-inline-start: solid red 3.5px;
+}
+
 #rotation{
     text-align: left;
     padding: 5px;

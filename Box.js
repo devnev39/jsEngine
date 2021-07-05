@@ -3,6 +3,7 @@ function Box(x,y,r){
     this.xr = x;
     this.yr = y;
     this.r = r;
+    this.shape = "Circle";
     this.energy = new Energy(this);
     
     param = {
@@ -22,14 +23,27 @@ function Box(x,y,r){
         stroke(255);
         fill(objc[this.c-1]);
         rotate(angle);
-        rectMode(CENTER);
-        ellipse(0,0,this.r*2);
-        fill('white');
-        line(0,0,this.r,0)
-        rotate(-angle);
-        //sfill('red');
-        textSize(15);
-        text(this.c,0,0);
+        
+        if(this.shape=="Circle"){
+            ellipseMode(CENTER);
+            ellipse(0,0,this.r*2);
+            fill('white');
+            line(0,0,this.r,0)
+            rotate(-angle);
+            //sfill('red');
+            textSize(15);   
+            text(this.c,0,0);
+        }else{
+            rectMode(CENTER);
+            rect(0,0,this.r*sizeMul,this.r*sizeMul);
+            fill('white');
+            line(0,0,0,this.r*sizeMul/2);
+            rotate(-angle);
+            //sfill('red');
+            textSize(15);   
+            text(this.c,0,0);
+        }
+        
         pop();
 
         this.energy.updateE();
@@ -49,12 +63,30 @@ function Box(x,y,r){
     }
 
     this.reset = function(){
-        World.remove(world,this.body);
-        this.body = Bodies.circle(this.xr,this.yr,this.r,param);
-        if(!rotationStat){
-            Body.setInertia(this.body,Infinity);
-        }
-        World.add(world,this.body);
+        this.resetShape(this.shape);
+    }
+
+    this.resetDim = function(size=20){
+        this.r = size;
+        this.resetShape(this.shape);
+    }
+
+    this.resetShape = function(sh){
+            World.remove(world,this.body);
+            if(sh=="Rect"){
+                this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
+                Body.setMass(this.body,masses[shapes.indexOf(this.shape)]);
+                this.shape = "Rect";
+            }else{
+                this.body = Bodies.circle(this.xr,this.xr,this.r,param);
+                Body.setMass(this.body,masses[shapes.indexOf(this.shape)]);
+                this.shape = "Circle";
+            }
+            if(!rotationStat){
+                Body.setInertia(this.body,Infinity);
+            }
+            World.add(world,this.body);
+            console.log(`added ${this.shape} with ${this.r}`);
     }
 }
 
