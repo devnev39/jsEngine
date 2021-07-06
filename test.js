@@ -55,7 +55,7 @@ colors = ['red','green','blue'];
 objc = ['#FF4130','#62E160','#5651FF'];
 labels = ['KE','PE','Velocity'];
 objs = ['object1','object2','object3'];
-gPl = {'Earth':[9.8,1],'Moon':[1.2,0.1653],'Mars':[3.721,0.3796]}
+gPl = {'Earth':[9.8,1],'Moon':[1.62,0.1653],'Mars':[3.721,0.3796]}
 let selected = 'Earth';
 
 function setup(){
