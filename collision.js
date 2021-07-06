@@ -11,6 +11,7 @@ let redi = 6;
 let currentEvt;
 let invervalId;
 let rest = 0.6;
+let unitInertia = 187.2724475287437;
 
 function setup(){
   canvas = createCanvas(500,300);
@@ -63,7 +64,7 @@ function setup(){
       for(let j=1;j<=i;j++){
         bx = new Box(pos_w+i,pos_h+j,redi);
         if(document.getElementById("r_inp").checked){
-          Body.setInertia(bx.body,(Math.PI/4)*(redi**4));
+          Body.setInertia(bx.body,bx.body.mass*unitInertia);
         }
         bx.changeState(0,0,rest,1,false);
         boxes.push(bx);
@@ -143,7 +144,7 @@ function rotate_changed(obj){
   console.log("r changed");
   if(obj.checked){
     boxes.forEach(ele=>{
-      Body.setInertia(ele.body,(Math.PI/4)*(ele.r**4));
+      Body.setInertia(ele.body,ele.body.mass*unitInertia);
     })
   }else{
     boxes.forEach(ele=>{
