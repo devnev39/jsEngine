@@ -321,6 +321,7 @@ function catchUp(){
         if(last==boxes[index].body){
             document.getElementById("sh_inp").value = shapes[index];
             document.getElementById("slider").value = sizes[index];
+            document.getElementById("sizeShow").innerText = "Current Value : "+sizes[index];
         }
     }
 }
