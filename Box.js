@@ -75,12 +75,10 @@ function Box(x,y,r){
             World.remove(world,this.body);
             if(sh=="Rect"){
                 this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
-                console.log(masses);
                 Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Rect";
             }else{
-                this.body = Bodies.circle(this.xr,this.xr,this.r,param);
-                console.log(masses);
+                this.body = Bodies.circle(this.xr,this.yr,this.r,param);
                 Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Circle";
             }
@@ -88,7 +86,7 @@ function Box(x,y,r){
                 Body.setInertia(this.body,Infinity);
             }
             World.add(world,this.body);
-            console.log(`added ${this.shape} with ${this.r}`);
+            //console.log(`added ${this.shape} with ${this.r}`);
     }
 }
 
