@@ -21,6 +21,8 @@ var left;
 let INTERVAL = 500;
 let CLICK = 0.0;
 let graphUpdate = false;
+let Inertias = [786.9532217767737,3750];
+let sizeMul = 2;
 
 var boxes = [];
    
@@ -30,7 +32,9 @@ let g;
 let count=1;
 let vels = [];
 let angs = [];
-let mass = [];
+let masses = [];
+let sizes = [];
+let shapes = [];
 
 let zeros = [];
 
@@ -49,7 +53,6 @@ let ObjProps = []
 let chart;
 let last;
 let rotationStat;
-let unitInertia = 786.9532217767737;
 
 colors = ['red','green','blue'];
 objc = ['#FF4130','#62E160','#5651FF'];
@@ -120,6 +123,8 @@ function draw(){
     updateInnerArray();
     for(let i=0;i<boxes.length;i++){
         boxes[i].show();
+        if(last==boxes[i].body)
+            document.getElementById("lastClick").innerText = "Last Click Obj : "+(i+1);
     }
     }
     checkVectorSeq();
@@ -132,8 +137,10 @@ function draw(){
     rect(-24,height/2,50,height);
 
     if(mouse.body){
-        if(single_clicked)
+        if(single_clicked){
             last = mouse.body;
+            catchUp();
+        }
         pos = mouse.body.position;
         fill(0,255,0);
         ellipse(pos.x,pos.y,20,20);
@@ -177,7 +184,10 @@ function addObj(){
         return;
     }
     new_Obj(count);
-    boxes.push(new Box(getRandom(width),getRandom(height),20));  
+    boxes.push(new Box(getRandom(width),getRandom(height),20));
+    sizes.push(20);  
+    shapes.push("Circle");
+    masses.push(1.24);
     ObjProps.push(new prop());
     addChartFrame(count);
     //console.log(boxes[0]);    
@@ -192,11 +202,11 @@ function start(){
         ele = document.getElementById(s);
         angs[i] = (+ele.childNodes[2].childNodes[1].value);
         vels[i] = (+ele.childNodes[1].childNodes[1].value);
-        mass[i] = (+ele.childNodes[3].childNodes[1].value);
+        masses[i] = (+ele.childNodes[3].childNodes[1].value);
     }
     if((boxes.length==vels.length)&&(boxes.length==angs.length)){
     for(let i=0;i<boxes.length;i++){
-        boxes[i].changeState(vels[i],radians(-angs[i]),rest,mass[i],false);
+        boxes[i].changeState(vels[i],radians(-angs[i]),rest,masses[i],false);
         print(boxes[i])
     }
     }
@@ -225,7 +235,7 @@ function objReset(clicked){
 function nullify(clicked){
     boxes.forEach(ele=>{
         if("object"+(boxes.indexOf(ele)+1) == clicked){
-            ele.changeState(0,0,0.6,mass[boxes.indexOf(ele)],true);
+            ele.changeState(0,0,0.6,masses[boxes.indexOf(ele)],true);
         } 
     })
 }
@@ -272,7 +282,7 @@ function rotateChanged(obj){
     if(obj.checked){
         rotationStat = true;
         boxes.forEach(box=>{
-            Body.setInertia(box.body,(box.body.mass*unitInertia));
+            Body.setInertia(box.body,(box.body.mass*Inertias[shapes.indexOf(box.shape)]));
         })
     }else{
         rotationStat = false;
@@ -280,6 +290,39 @@ function rotateChanged(obj){
             Body.setInertia(box.body,Infinity);
             Body.setAngularVelocity(box.body,0);
         })
+    }
+}
+
+function sizeChanged(size){
+    for (let index = 0; index < boxes.length; index++) {
+        if(boxes[index].body == last){
+            sizes[index] = (+size);
+            boxes[index].resetDim(sizes[index]);
+            last = boxes[index].body;
+        }
+    }
+    document.getElementById("sizeShow").innerText = "Current Value : "+(size);
+}
+
+function shapeChanged(){
+    for (let index = 0; index < boxes.length; index++) {
+        if(last == boxes[index].body){
+            console.log(masses);
+            shapes[index] = document.getElementById("sh_inp").value;
+            boxes[index].resetShape(shapes[index]);
+            last = boxes[index].body;
+            console.log(masses);
+        }    
+    }
+}
+
+function catchUp(){
+    for (let index = 0; index < boxes.length; index++) {
+        if(last==boxes[index].body){
+            document.getElementById("sh_inp").value = shapes[index];
+            document.getElementById("slider").value = sizes[index];
+            document.getElementById("sizeShow").innerText = "Current Value : "+sizes[index];
+        }
     }
 }
 
@@ -368,9 +411,11 @@ function RadioCheck(){
 
 function updateInnerArray(){
     for(let i=0;i<boxes.length;i++){
-        vels[i] = resultant(boxes[i].body.velocity);
-        mass[i] = boxes[i].body.mass;
-        angs[i] = boxes[i].body.angularVelocity;
+        if(boxes[i].body){
+            vels[i] = resultant(boxes[i].body.velocity);
+            masses[i] = boxes[i].body.mass;
+            angs[i] = boxes[i].body.angularVelocity;
+        }
     }
 }
 
