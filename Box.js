@@ -74,11 +74,13 @@ function Box(x,y,r){
     this.resetShape = function(sh){
             World.remove(world,this.body);
             if(sh=="Rect"){
-                this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
+                if(callFromResetShape) this.body = Bodies.rectangle(this.body.position.x,this.body.position.y,this.r*sizeMul,this.r*sizeMul,param);
+                else this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
                 Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Rect";
             }else{
-                this.body = Bodies.circle(this.xr,this.yr,this.r,param);
+                if(callFromResetShape) this.body = Bodies.rectangle(this.body.position.x,this.body.position.y,this.r*sizeMul,this.r*sizeMul,param);
+                else this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
                 Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Circle";
             }

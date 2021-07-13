@@ -53,6 +53,7 @@ let ObjProps = []
 let chart;
 let last;
 let rotationStat;
+let callFromResetShape = false;
 
 colors = ['red','green','blue'];
 objc = ['#FF4130','#62E160','#5651FF'];
@@ -213,6 +214,7 @@ function start(){
 }
 
 function reset(){
+    callFromResetShape = false;
     for(let i=0;i<boxes.length;i++){
         boxes[i].reset();
         chart.data.labels = [(CLICK).toFixed(2)];
@@ -294,6 +296,7 @@ function rotateChanged(obj){
 }
 
 function sizeChanged(size){
+    callFromResetShape = true;
     for (let index = 0; index < boxes.length; index++) {
         if(boxes[index].body == last){
             sizes[index] = (+size);
@@ -302,9 +305,11 @@ function sizeChanged(size){
         }
     }
     document.getElementById("sizeShow").innerText = "Current Value : "+(size);
+    callFromResetShape = false;
 }
 
 function shapeChanged(){
+    callFromResetShape = true;
     for (let index = 0; index < boxes.length; index++) {
         if(last == boxes[index].body){
             console.log(masses);
@@ -314,6 +319,7 @@ function shapeChanged(){
             console.log(masses);
         }    
     }
+    callFromResetShape = false;
 }
 
 function catchUp(){
