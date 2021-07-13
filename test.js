@@ -214,7 +214,6 @@ function start(){
 }
 
 function reset(){
-    callFromResetShape = false;
     for(let i=0;i<boxes.length;i++){
         boxes[i].reset();
         chart.data.labels = [(CLICK).toFixed(2)];
