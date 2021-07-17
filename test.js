@@ -462,10 +462,12 @@ function updateGraph(index){
 
 function deltaPos(){
     if(boxes.length && (resultant(boxes[0].body.velocity) > 0.001)){ 
-        console.log(boxes[0].body.velocity);
-        console.log((height-boxes[0].body.position.y)/60); 
+        console.log("VEL : ",boxes[0].body.velocity);
+        console.log("Height : ",(height-boxes[0].body.position.y)/60); 
         console.log("pos : ",boxes[0].body.position);
-        console.log((CLICK).toFixed(2));
+        console.log("Int : ",(CLICK).toFixed(2));
+        console.log("Angular VEL : ",boxes[0].body.angularVelocity);
+        console.log("RKE : ",boxes[0].energy.RKE);
     }
 }
 
@@ -479,7 +481,7 @@ function updateLable(){
         ObjProps[i].VEL = boxes[i].energy.VEL;
 
         document.getElementById(String("vel_va"+(i+1))).innerText = boxes[i].energy.VEL;
-        document.getElementById(String("ke_va"+(i+1))).innerText = boxes[i].energy.KE;
+        document.getElementById(String("ke_va"+(i+1))).innerText = boxes[i].energy.KE + " + " + round(boxes[i].energy.RKE,2);
         document.getElementById(String("pe_va"+(i+1))).innerText = boxes[i].energy.PE;
         if(graphUpdate){
         let arr = [ObjProps[i].KE,ObjProps[i].PE,ObjProps[i].VEL];

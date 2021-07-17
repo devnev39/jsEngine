@@ -113,6 +113,7 @@ Energy = function(box){
         }else{
             pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-(box.r*sizeMul/2))/60)).toFixed(2);
         }
+        this.RKE = 0.5*box.body.mass*Inertias[shapes.indexOf(box.shape)]*(box.body.angularVelocity**2);
         this.KE = ke;
         this.PE = pE;
         this.VEL = vel;
