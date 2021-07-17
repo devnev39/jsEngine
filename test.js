@@ -185,7 +185,7 @@ function addObj(){
         return;
     }
     new_Obj(count);
-    boxes.push(new Box(getRandom(width),getRandom(height),20));
+    boxes.push(new Box(getRandom(width),getRandom(height),22));
     sizes.push(20);  
     shapes.push("Circle");
     masses.push(1.24);

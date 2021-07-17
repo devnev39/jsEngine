@@ -79,8 +79,8 @@ function Box(x,y,r){
                 Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Rect";
             }else{
-                if(callFromResetShape) this.body = Bodies.rectangle(this.body.position.x,this.body.position.y,this.r*sizeMul,this.r*sizeMul,param);
-                else this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
+                if(callFromResetShape) this.body = Bodies.circle(this.body.position.x,this.body.position.y,this.r,param);
+                else this.body = Bodies.circle(this.xr,this.yr,this.r,param);
                 Body.setMass(this.body,masses[shapes.indexOf(sh)]);
                 this.shape = "Circle";
             }
