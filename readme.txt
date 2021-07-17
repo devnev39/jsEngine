@@ -1,14 +1,14 @@
-This is a Javascirpt matter engine. It can simulate collisions and can give upto 96% precise energies with respect to clock.
+This is a Javascript matter engine. It can simulate collisions and can give upto 96% precise energies with respect to clock.
 
 To not face any error do as follow ->
 
 Start index.html
 
-1.  ChartUpdate is true by default. Before adding any objects check that to false.
+1.  ChartUpdate is false by default.
 
 2.  For getting chart of multiple objects at same time, add all objects setting ChartUpdate to false first. After adding the objects, you can set ChartUpdate to true.
 
-3.  Start will apply the parameter specified in the boxes to the objects.
+3.  Start will apply the parameter specified in the boxes of the respecive objects.
 
 4.  Reset will reset all the object position and it's past history with graph.
 
