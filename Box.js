@@ -76,12 +76,12 @@ function Box(x,y,r){
             if(sh=="Rect"){
                 if(callFromResetShape) this.body = Bodies.rectangle(this.body.position.x,this.body.position.y,this.r*sizeMul,this.r*sizeMul,param);
                 else this.body = Bodies.rectangle(this.xr,this.yr,this.r*sizeMul,this.r*sizeMul,param);
-                Body.setMass(this.body,masses[shapes.indexOf(sh)]);
+                Body.setMass(this.body,masses[this.c-1]);
                 this.shape = "Rect";
             }else{
                 if(callFromResetShape) this.body = Bodies.circle(this.body.position.x,this.body.position.y,this.r,param);
                 else this.body = Bodies.circle(this.xr,this.yr,this.r,param);
-                Body.setMass(this.body,masses[shapes.indexOf(sh)]);
+                Body.setMass(this.body,masses[this.c-1]);
                 this.shape = "Circle";
             }
             if(!rotationStat){
@@ -113,7 +113,7 @@ Energy = function(box){
         }else{
             pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-(box.r*sizeMul/2))/60)).toFixed(2);
         }
-        this.RKE = round(0.5*box.body.mass*Inertias[shapes.indexOf(box.shape)]*(box.body.angularVelocity**2),2);
+        this.RKE = round(0.5*box.body.inertia*(box.body.angularSpeed**2),2); //working for rect 
         this.KE = ke;
         this.PE = pE;
         this.VEL = vel;

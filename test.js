@@ -21,7 +21,7 @@ var left;
 let INTERVAL = 500;
 let CLICK = 0.0;
 let graphUpdate = false;
-let Inertias = [786.9532217767737,3750];
+let Inertias = {"Circle" : 786.953221776,"Rect" : 3737.99626};
 let sizeMul = 2;
 
 var boxes = [];
@@ -109,6 +109,7 @@ function setup(){
     //graph();
 
     document.getElementById("objects").checked = true;
+    restChanged(document.getElementById("rest_inp"));
 
     console.log(mcon);
     console.log(engine);
@@ -116,14 +117,11 @@ function setup(){
 }
 
 function draw(){
-    rest = document.getElementById("rest_inp").value;
-    rest = rest ? rest : 0;
-    ground.restitution = up.restitution = left.restitution = right.restitution = rest;
     background('#222222');
     if(boxes.length>0){
     updateInnerArray();
     for(let i=0;i<boxes.length;i++){
-        boxes[i].show();
+        boxes[i].show();    
         if(last==boxes[i].body)
             document.getElementById("lastClick").innerText = "Last Click Obj : "+(i+1);
     }
@@ -185,7 +183,7 @@ function addObj(){
         return;
     }
     new_Obj(count);
-    boxes.push(new Box(getRandom(width),getRandom(height),22));
+    boxes.push(new Box(getRandom(width),getRandom(height),20));
     sizes.push(20);  
     shapes.push("Circle");
     masses.push(1.24);
@@ -194,10 +192,11 @@ function addObj(){
     //console.log(boxes[0]);    
     document.getElementById("mas"+(count)).value = (boxes[count-1].body.mass).toFixed(2);
     count++;
+    rotateChanged(document.getElementById("r_con"));
+    restChanged(document.getElementById("rest_inp"));
 }
 
 function start(){
-    rest = document.getElementById("rest_inp").value;
     for(let i=0;i<count-1;i++){
         s = String("object"+(i+1));
         ele = document.getElementById(s);
@@ -247,6 +246,16 @@ function normalize_all(){
     })
 }
 
+function restChanged(obj){
+    rest = +obj.value;
+    if(rest>1 || rest<0){
+        rest = obj.value = 0.6;
+        alert("Value between 0 and 1 !");
+    }
+    ground.restitution = up.restitution = left.restitution = right.restitution = rest;
+    boxes.forEach(box=>{box.body.restitution = rest});
+}
+
 function onGraphUpdate(clicked){
     if(graphUpdate){
         graphUpdate = false;
@@ -283,7 +292,7 @@ function rotateChanged(obj){
     if(obj.checked){
         rotationStat = true;
         boxes.forEach(box=>{
-            Body.setInertia(box.body,(box.body.mass*Inertias[shapes.indexOf(box.shape)]));
+            Body.setInertia(box.body,(box.body.mass*Inertias[box.shape]));
         })
     }else{
         rotationStat = false;
@@ -313,12 +322,16 @@ function shapeChanged(){
         if(last == boxes[index].body){
             console.log(masses);
             shapes[index] = document.getElementById("sh_inp").value;
+            boxes[index].r = 20;
+            sizes[index] = 20;
             boxes[index].resetShape(shapes[index]);
             last = boxes[index].body;
             console.log(masses);
         }    
     }
     callFromResetShape = false;
+    rotateChanged(document.getElementById("r_con"));
+    catchUp();
 }
 
 function catchUp(){
