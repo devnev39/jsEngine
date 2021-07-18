@@ -476,12 +476,13 @@ function updateLable(){
     try{
     if(boxes.length){
     for(let i=0;i<boxes.length;i++){
-        ObjProps[i].KE = boxes[i].energy.KE;
+        ObjProps[i].KE = boxes[i].energy.KE + boxes[i].energy.RKE;
         ObjProps[i].PE = boxes[i].energy.PE;
         ObjProps[i].VEL = boxes[i].energy.VEL;
+        let KESTR = boxes[i].energy.KE + " + " + boxes[i].energy.RKE + " = " + round(boxes[i].energy.KE+boxes[i].energy.RKE,2);
 
         document.getElementById(String("vel_va"+(i+1))).innerText = boxes[i].energy.VEL;
-        document.getElementById(String("ke_va"+(i+1))).innerText = boxes[i].energy.KE + " + " + round(boxes[i].energy.RKE,2);
+        document.getElementById(String("ke_va"+(i+1))).innerText = KESTR;
         document.getElementById(String("pe_va"+(i+1))).innerText = boxes[i].energy.PE;
         if(graphUpdate){
         let arr = [ObjProps[i].KE,ObjProps[i].PE,ObjProps[i].VEL];
