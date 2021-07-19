@@ -108,12 +108,13 @@ Energy = function(box){
         let vel = (resultant(box.body.velocity)).toFixed(2);
         let ke = +(0.5*box.body.mass*(vel**2)).toFixed(2);
         let pE = 0;
+        let rke = round(this.RKE = round(0.5*box.body.inertia*(box.body.angularSpeed**2),2),2);
         if(box.shape=="Circle"){
             pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-box.r)/60)).toFixed(2);
         }else{
             pE = (box.body.mass*resultant(engine.gravity)*gPl[selected][0]*((height-box.body.position.y-(box.r*sizeMul/2))/60)).toFixed(2);
         }
-        this.RKE = round(0.5*box.body.inertia*(box.body.angularSpeed**2),2); //working for rect 
+        this.RKE = rke ? rke : 0;
         this.KE = ke;
         this.PE = pE;
         this.VEL = vel;

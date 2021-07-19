@@ -314,6 +314,7 @@ function sizeChanged(size){
     }
     document.getElementById("sizeShow").innerText = "Current Value : "+(size);
     callFromResetShape = false;
+    restChanged(document.getElementById("rest_inp"));
 }
 
 function shapeChanged(){
@@ -332,6 +333,7 @@ function shapeChanged(){
     callFromResetShape = false;
     rotateChanged(document.getElementById("r_con"));
     catchUp();
+    restChanged(document.getElementById("rest_inp"));
 }
 
 function catchUp(){
