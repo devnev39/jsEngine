@@ -2,7 +2,7 @@ This is a Javascirpt matter engine. It can simulate conllisions and can give upt
 
 To not face any error do as follow ->
 
-start test.html from local server or go to [https://devnev39.github.io/hosting/]
+start test.html from local server or go to https://devnev39.github.io/hosting/
 
 1.  ChartUpdate is true by default. Before adding any objects check that to false.
 
